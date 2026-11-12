@@ -1,0 +1,16 @@
+spectrum_a,phase_a_deg,spectrum_b,phase_b_deg,min_gap_GHz,f_a_GHz,f_b_GHz,M_star_index_a,M_star_index_b,same_k_mod_lattice,verdict
+full_GM,360,x_ee,0,3e-05,9.371189,9.371219,0,0,True,K-CONSISTENT MATCH (needs mode/parity confirmation)
+full_GM,360,y_ee,0,0.002757,9.371189,9.368432,0,0,True,K-CONSISTENT MATCH (needs mode/parity confirmation)
+x_ee,0,y_ee,0,0.002787,9.371219,9.368432,0,0,True,K-CONSISTENT MATCH (needs mode/parity confirmation)
+x_mm,360,y_ee,0,0.006998,45.319294,45.312296,0,0,True,K-CONSISTENT MATCH (needs mode/parity confirmation)
+x_mm,360,x_em,180,0.008819,39.209216,39.200397,0,5,False,k-consistent but frequencies differ
+x_em,180,x_me,180,0.011333,57.807723,57.819056,5,5,True,K-CONSISTENT MATCH (needs mode/parity confirmation)
+full_GM,360,x_mm,360,0.017643,9.371189,9.353546,0,0,True,K-CONSISTENT MATCH (needs mode/parity confirmation)
+x_mm,360,x_ee,0,0.017673,9.353546,9.371219,0,0,True,K-CONSISTENT MATCH (needs mode/parity confirmation)
+x_mm,360,x_me,180,0.11542,39.209216,39.093796,0,5,False,k-consistent but frequencies differ
+x_em,180,y_ee,0,0.245202,39.200397,39.445599,5,0,False,k-consistent but frequencies differ
+x_me,180,y_ee,0,0.351803,39.093796,39.445599,5,0,False,k-consistent but frequencies differ
+x_ee,0,x_em,180,1.091932,50.305275,51.397207,0,5,False,k-consistent but frequencies differ
+x_ee,0,x_me,180,1.335868,40.429664,39.093796,0,5,False,k-consistent but frequencies differ
+full_GM,360,x_me,180,2.259238,30.738838,32.998076,0,5,False,k-consistent but frequencies differ
+full_GM,360,x_em,180,3.491967,30.738838,34.230805,0,5,False,k-consistent but frequencies differ

@@ -1,0 +1,9 @@
+junction,min_gap_GHz,f_a_GHz,f_b_GHz
+M even: Gamma-M(phi_y=180) vs M-K(phi_x=120),2.109695,28.94603,26.836335
+M odd: Gamma-M(phi_y=180) vs M-K(phi_x=120),0.000572,29.327387,29.326815
+M even alt: Gamma-M(phi_y=360) vs M-K(phi_x=120),0.906954,25.929381,26.836335
+M odd alt: Gamma-M(phi_y=360) vs M-K(phi_x=120),1.404923,30.731738,29.326815
+K even: M-K(phi_x=0) vs K-Gamma(phi_x=180),5.812544,30.772039,36.584583
+K odd: M-K(phi_x=0) vs K-Gamma(phi_x=180),4.498975,30.707835,35.20681
+K even alt: M-K(phi_x=0) vs K-Gamma(phi_x=120),0.714387,26.121948,26.836335
+K odd alt: M-K(phi_x=0) vs K-Gamma(phi_x=120),1.38102,30.707835,29.326815

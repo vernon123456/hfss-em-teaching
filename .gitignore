@@ -1,0 +1,38 @@
+# ===== AEDT 工程二进制（可由脚本重生成，P1）=====
+*.aedt
+*.aedtresults/
+*.pyaedt
+*.pyaedtresults/
+
+# ===== 求解产物（导出前为缓存，可再生）=====
+eig*/
+*.sd
+*.ngmesh
+*.stats
+*.g3derr
+*.info
+*.mesh
+*.asol
+*.ans
+*.fld
+*.dsgr
+
+# ===== 日志与临时 =====
+*.log
+__pycache__/
+*.pyc
+*.lock
+.aedt.lock
+*.tmp
+
+# ===== 操作系统/编辑器 =====
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+
+# ===== 本机 Agent 内存（不进仓库）=====
+.workbuddy/
+
+# ===== 杂项 =====
+batch.log

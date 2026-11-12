@@ -1,0 +1,11 @@
+junction,side_a,side_b,gap_GHz,kA_x,kA_y,kB_x,kB_y,kA_bz_x,kA_bz_y,kB_bz_x,kB_bz_y,dist_to_M_star_A,dist_to_M_star_B,dist_to_K_star_A,dist_to_K_star_B,same_k_mod_lattice,both_at_M,both_at_K,reason,verdict
+M,ee@180,y_odd@120,0.000572,2.0944,0.6046,0.69813,1.2092,0.0,-0.6046,-1.39626,0.0,0.6046,0.69813,0.92354,0.0,False,False,False,no integer reciprocal translation,FREQUENCY COINCIDENCE ONLY
+M,mm@180,y_even@120,2.109695,0.0,0.6046,0.69813,0.0,0.0,0.6046,0.69813,0.0,0.6046,0.69813,0.92354,0.69813,False,False,False,no integer reciprocal translation,FREQUENCY COINCIDENCE ONLY
+M,em@180,y_even@120,0.113119,1.0472,0.6046,0.69813,0.0,-1.0472,-0.6046,0.69813,0.0,0.0,0.69813,0.69813,0.69813,False,False,False,no integer reciprocal translation,FREQUENCY COINCIDENCE ONLY
+M,me@180,y_odd@120,0.060107,1.0472,0.6046,0.69813,1.2092,-1.0472,-0.6046,-1.39626,0.0,0.0,0.69813,0.69813,0.0,False,False,False,no integer reciprocal translation,FREQUENCY COINCIDENCE ONLY
+M,em@180,y_odd@120,0.166708,1.0472,0.6046,0.69813,1.2092,-1.0472,-0.6046,-1.39626,0.0,0.0,0.69813,0.69813,0.0,False,False,False,no integer reciprocal translation,FREQUENCY COINCIDENCE ONLY
+M,me@180,y_even@120,0.21972,1.0472,0.6046,0.69813,0.0,-1.0472,-0.6046,0.69813,0.0,0.0,0.69813,0.69813,0.69813,False,False,False,no integer reciprocal translation,FREQUENCY COINCIDENCE ONLY
+M,mm@360,y_even@120,0.906954,0.0,1.2092,0.69813,0.0,0.0,-1.2092,0.69813,0.0,0.0,0.69813,0.69813,0.69813,False,False,False,no integer reciprocal translation,FREQUENCY COINCIDENCE ONLY
+K,y_even@0,y_even@120,0.714387,0.0,0.0,0.69813,0.0,0.0,0.0,0.69813,0.0,1.2092,0.69813,1.39626,0.69813,False,False,False,no integer reciprocal translation,FREQUENCY COINCIDENCE ONLY
+K,y_odd@0,y_odd@120,1.38102,0.0,1.2092,0.69813,1.2092,0.0,-1.2092,-1.39626,0.0,0.0,0.69813,0.69813,0.0,False,False,False,no integer reciprocal translation,FREQUENCY COINCIDENCE ONLY
+K,y_even@0,y_even@180,5.812544,0.0,0.0,1.0472,0.0,0.0,0.0,1.0472,0.0,1.2092,0.6046,1.39626,0.34907,False,False,False,no integer reciprocal translation,FREQUENCY COINCIDENCE ONLY

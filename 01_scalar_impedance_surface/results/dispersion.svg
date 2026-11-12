@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" width="760" height="460">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="380" y="28" text-anchor="middle" font-family="Arial" font-size="17" fill="#111">Scalar impedance surface: TM surface-wave dispersion (HFSS Eigenmode)</text>
+<text x="380" y="440" text-anchor="middle" font-family="Arial" font-size="12" fill="#333">beta (rad/m)</text>
+<text x="18" y="225" transform="rotate(-90 18 225)" text-anchor="middle" font-family="Arial" font-size="12" fill="#333">f (GHz)</text>
+<line x1="80.0" y1="390.0" x2="700.0" y2="390.0" stroke="#e5e5e5"/>
+<line x1="80.0" y1="390.0" x2="80.0" y2="60.0" stroke="#e5e5e5"/>
+<text x="72" y="393.0" text-anchor="end" font-size="10" fill="#555">0.0</text>
+<text x="80.0" y="408" text-anchor="middle" font-size="10" fill="#555">0</text>
+<line x1="80.0" y1="324.0" x2="700.0" y2="324.0" stroke="#e5e5e5"/>
+<line x1="204.0" y1="390.0" x2="204.0" y2="60.0" stroke="#e5e5e5"/>
+<text x="72" y="327.0" text-anchor="end" font-size="10" fill="#555">3.2</text>
+<text x="204.0" y="408" text-anchor="middle" font-size="10" fill="#555">62</text>
+<line x1="80.0" y1="258.0" x2="700.0" y2="258.0" stroke="#e5e5e5"/>
+<line x1="328.0" y1="390.0" x2="328.0" y2="60.0" stroke="#e5e5e5"/>
+<text x="72" y="261.0" text-anchor="end" font-size="10" fill="#555">6.3</text>
+<text x="328.0" y="408" text-anchor="middle" font-size="10" fill="#555">125</text>
+<line x1="80.0" y1="192.0" x2="700.0" y2="192.0" stroke="#e5e5e5"/>
+<line x1="452.0" y1="390.0" x2="452.0" y2="60.0" stroke="#e5e5e5"/>
+<text x="72" y="195.0" text-anchor="end" font-size="10" fill="#555">9.5</text>
+<text x="452.0" y="408" text-anchor="middle" font-size="10" fill="#555">187</text>
+<line x1="80.0" y1="126.0" x2="700.0" y2="126.0" stroke="#e5e5e5"/>
+<line x1="576.0" y1="390.0" x2="576.0" y2="60.0" stroke="#e5e5e5"/>
+<text x="72" y="129.0" text-anchor="end" font-size="10" fill="#555">12.6</text>
+<text x="576.0" y="408" text-anchor="middle" font-size="10" fill="#555">249</text>
+<line x1="80.0" y1="60.0" x2="700.0" y2="60.0" stroke="#e5e5e5"/>
+<line x1="700.0" y1="390.0" x2="700.0" y2="60.0" stroke="#e5e5e5"/>
+<text x="72" y="63.0" text-anchor="end" font-size="10" fill="#555">15.8</text>
+<text x="700.0" y="408" text-anchor="middle" font-size="10" fill="#555">312</text>
+<line x1="80" y1="390" x2="700" y2="390" stroke="#333"/>
+<line x1="80" y1="60" x2="80" y2="390" stroke="#333"/>
+<polyline points="253.7,313.2 323.1,282.5 392.6,251.8 462.1,221.1 531.5,190.4 601.0,159.7 670.5,129.0" fill="none" stroke="#1f77b4" stroke-width="2" stroke-dasharray="6 4"/>
+<polyline points="253.7,313.5 323.1,282.6 392.6,251.9 462.1,220.8 531.5,190.4 601.0,159.6 670.5,130.1" fill="none" stroke="#d62728" stroke-width="2"/>
+<circle cx="253.7" cy="313.5" r="4" fill="#d62728"/>
+<circle cx="323.1" cy="282.6" r="4" fill="#d62728"/>
+<circle cx="392.6" cy="251.9" r="4" fill="#d62728"/>
+<circle cx="462.1" cy="220.8" r="4" fill="#d62728"/>
+<circle cx="531.5" cy="190.4" r="4" fill="#d62728"/>
+<circle cx="601.0" cy="159.6" r="4" fill="#d62728"/>
+<circle cx="670.5" cy="130.1" r="4" fill="#d62728"/>
+<text x="470" y="80" font-size="11" fill="#1f77b4" font-family="Arial">analytic beta=k0 sqrt(1+(Xs/eta0)^2)</text>
+<text x="470" y="98" font-size="11" fill="#d62728" font-family="Arial">HFSS Eigenmode, mode 1</text>
+</svg>

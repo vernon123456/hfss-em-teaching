@@ -1,0 +1,5 @@
+spectrum,high_symmetry_points,covers_M_K_Gamma
+em,M,False
+me,M,False
+even,"Gamma,K",False
+odd,"K,M",False

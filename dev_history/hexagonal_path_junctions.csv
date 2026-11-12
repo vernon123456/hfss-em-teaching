@@ -1,0 +1,4 @@
+junction,side_a,side_b,min_gap_GHz,f_a_GHz,f_b_GHz,same_k,reason,verdict
+M,full_GM@360,y_ee@0,0.002757,9.371189,9.368432,True,k1-k2 = 0*b1 + 0*b2,M-POINT CLOSURE
+K,y_mm@240,y_ee@120,0.068615,48.56921,48.500595,True,time reversal: k1+k2 = 1*b1 + 1*b2,k mismatch or frequency gap
+K,y_ee@120,y_mm@240,0.068615,48.500595,48.56921,True,time reversal: k1+k2 = 1*b1 + 1*b2,k mismatch or frequency gap
