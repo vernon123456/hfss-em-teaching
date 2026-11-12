@@ -10,13 +10,13 @@
 
 | # | 目录 | 主题 | 状态 | 一句话结论 |
 |---|---|---|---|---|
-| 1 | `scalar_impedance_eigenmode/` | 标量阻抗面最小案例 | 达成 | 7 点色散最大误差 0.425%，验证基准成立 |
-| 2 | `patch_unitcell/` | 接地方贴片单元（Fong 2010） | 达成（主值） | Xs 反解 239.8→147.3 Ω；大 gap 偏差 8.5~9.8% 根因未定位 |
-| 3 | `tensor_patch/`（`parametric`+`ideal_tensor`） | 切片方贴片张量阻抗面 | 部分达成 | 主轴角随 θ_s 单调，端点偏差 17~23° 根因未定位 |
-| 4 | `tensor_patch/`（`supercell`） | 调制阻抗超胞带隙（8 单元 gap 正弦） | 达成 | M=0→0.3 区边界带隙 0.0010→0.0638 GHz 单调打开 |
-| 5 | `tensor_patch/`（`circular`+`circular_supercell`） | 开槽圆贴片单元 | 达成（优于方切片） | 主轴角端点偏差 ≤2.2°；超胞带隙 0.0018→0.1640 GHz |
-| 6 | `tensor_patch/`（`hexagonal` 及子实验） | 六边形排列（矩形超胞） | 未达可发表 | M 点严格闭合 0.002757 GHz；K 点需复模态，HFSS ES 拿不到 |
-| — | `tensor_patch/`（`hexagonal_driven_probe`） | Driven Floquet 反演复波数 | 失败/回退 | 第 2 步 validate/analyze 失败，未产出 S 参数 |
+| 1 | `01_scalar_impedance_surface/` | 标量阻抗面最小案例 | 达成 | 7 点色散最大误差 0.425%，验证基准成立 |
+| 2 | `02_patch_unit_cell/` | 接地方贴片单元（Fong 2010） | 达成（主值） | Xs 反解 239.8→147.3 Ω；大 gap 偏差 8.5~9.8% 根因未定位 |
+| 3 | `03_tensor_sliced_patch/`（`parametric`+`ideal_tensor`） | 切片方贴片张量阻抗面 | 部分达成 | 主轴角随 θ_s 单调，端点偏差 17~23° 根因未定位 |
+| 4 | `04_modulated_supercell/`（`supercell`） | 调制阻抗超胞带隙（8 单元 gap 正弦） | 达成 | M=0→0.3 区边界带隙 0.0010→0.0638 GHz 单调打开 |
+| 5 | `05_slotted_circular_patch/`（`circular`+`circular_supercell`） | 开槽圆贴片单元 | 达成（优于方切片） | 主轴角端点偏差 ≤2.2°；超胞带隙 0.0018→0.1640 GHz |
+| 6 | `06_hexagonal_lattice/`（`hexagonal` 及子实验） | 六边形排列（矩形超胞） | 未达可发表 | M 点严格闭合 0.002757 GHz；K 点需复模态，HFSS ES 拿不到 |
+| — | `06_hexagonal_lattice/`（`hexagonal_driven_probe`） | Driven Floquet 反演复波数 | 失败/回退 | 第 2 步 validate/analyze 失败，未产出 S 参数 |
 
 ---
 
@@ -89,7 +89,7 @@
 | 3 | `parametric_scan.py`, `ideal_tensor_check.py` | `README_tensor.md`, `Xeff_by_angle.csv`, `dispersion_M.png` |
 | 4 | `supercell_scan.py` | `README_supercell.md`, `bandgap_vs_M.csv/png` |
 | 5 | `circular_patch.py`, `circular_supercell.py` | `README_circular.md`, `circular_xeff.csv`, `circular_fit.csv`, `circular_axis.png`, `circular_bandgap_vs_M.csv/png` |
-| 6 | `hexagonal_patch.py`(或 `hexagonal_rect.py`), `hexagonal_ibz.py`, `hexagonal_modulation.py` | `README_hexagonal.md`, `hexagonal_ibz.csv`, `hexagonal_dispersion.png`, `hexagonal_ibz_dispersion.png`, `hexagonal_GMK_final.png`, `hexagonal_M_pairs.csv` |
+| 6 | `hexagonal_patch.py`(或 `hexagonal_rect.py`), `hexagonal_ibz.py`, `hexagonal_modulation.py` | `README.md`, `hexagonal_ibz.csv`, `hexagonal_dispersion.png`, `hexagonal_ibz_dispersion.png`, `hexagonal_GMK_final.png`, `hexagonal_M_pairs.csv` |
 
 ---
 
@@ -101,7 +101,7 @@
 - `patch_unitcell/patch_unitcell.aedtresults/`（176 MB）、`ideal_sheet.aedtresults/`（67 MB）
 - 所有 `*.aedt`、`*.pyaedt`
 - 所有 `*.log`、`eig*/` 目录、`__pycache__`
-- 探索脚本移入 `tensor_patch/dev_history/`
+- 探索脚本移入 `dev_history/`
 
 清理后预计体积从 2.7 GB 降至约 **20~30 MB**，可直接 `git add` 纳入。
 
@@ -146,7 +146,7 @@ hfss-em-teaching/                # 仓库根
     ├── hexagonal_modulation.py
     └── results/{hexagonal_ibz.csv, hexagonal_dispersion.png, hexagonal_ibz_dispersion.png, hexagonal_GMK_final.png, hexagonal_M_pairs.csv}
 ```
-注：案例 3/4/5/6 现同处 `tensor_patch/` 单工程多 design；上传时每个案例只抽取其 canonical 脚本与结果，工程 `.aedt` 不提交（脚本可重建）。`dev_history/` 可选，不放教学主线。
+注：案例已重组为 `01_scalar_impedance_surface/` … `06_hexagonal_lattice/` 六个独立目录；上传时每个案例只提交其 canonical 脚本与 `results/`，工程 `.aedt` 不提交（脚本可重建）。`dev_history/` 存放探索脚本，可选，不放教学主线。
 
 ---
 

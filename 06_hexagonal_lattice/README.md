@@ -44,7 +44,7 @@
 
 ## 诊断结果（2026-11-09 晚，修正前述假设）
 
-`hexagonal_diagnose.py` 做了两件事：相位对称性检验，以及低相位段分支追踪。频率连续性用来替代场型图，原因是 Eigenmode 场量导出路径在本工作区前几轮已验证不可靠（`post.get_solution_data` 崩、`CreateReport` 无输出）。
+`dev_history/hexagonal_diagnose.py` 做了两件事：相位对称性检验，以及低相位段分支追踪。频率连续性用来替代场型图，原因是 Eigenmode 场量导出路径在本工作区前几轮已验证不可靠（`post.get_solution_data` 崩、`CreateReport` 无输出）。
 
 | 检验 | 结果 |
 |---|---|
@@ -110,7 +110,7 @@ k0=356.29 rad/m。**β/k0 从 0.98 跨到 1.10，Xeff 从无解跳到 176 Ω**�
 
 可能原因（未验证）：三组非正交周期边界过度约束（六边形晶格只有 2 个独立晶格矢量）；某组配对面的 U/V 向量方向不匹配。`validate_simple` 不检查这两项。
 
-回滚路径：当前尝试状态备份为 `.workbuddy/backups/tensor_patch/tensor_patch.aedt.20261110-ws_attempt.bak`；工程已还原到 `tensor_patch.aedt.20261110-3.bak`（菱形，可求解）。`hexagonal_ws.py` 保留供后续调试，它会重建六边形几何，运行前须先备份。
+回滚路径：当前尝试状态备份为 `.workbuddy/backups/tensor_patch/tensor_patch.aedt.20261110-ws_attempt.bak`；工程已还原到 `tensor_patch.aedt.20261110-3.bak`（菱形，可求解）。`dev_history/hexagonal_ws.py` 保留供后续调试，它会重建六边形几何，运行前须先备份。
 
 诊断问题：三组周期边界中哪一组让求解器拒绝。需要在 AEDT GUI 或用原生 COM 命令逐组删除验证。
 
@@ -198,9 +198,9 @@ f1 从 9.378 GHz 降到 6.642 GHz（30 deg）再升到 24.083 GHz（180 deg）�
 
 | 项 | 结果 |
 |---|---|
-| 扩展扫描 | `hexagonal_ibz_full.py`，ΓM 13 点（0…360°）加 ΓK1 9 点（0…240°），共 22 点全部出数 |
+| 扩展扫描 | `dev_history/hexagonal_ibz_full.py`，ΓM 13 点（0…360°）加 ΓK1 9 点（0…240°），共 22 点全部出数 |
 | 数据自洽 | ΓM 段 `φy` 与 `360−φy` 频率完全一致（30°/330° 均 6.6426 GHz）；ΓK1 段 `φx` 与 `360−φx` 一致（150°/210° 均 31.783 GHz） |
-| 奇偶模 | `hexagonal_sym.py` 建半超胞（Ly/2），y=0 与 y=Ly/2 加对称面。偶模双 PMC（`M^y_0 M^y_{p_y/2}`），奇模双 PEC（`E^y_0 E^y_{p_y/2}`），各 9 点全部出数 |
+| 奇偶模 | `dev_history/hexagonal_sym.py` 建半超胞（Ly/2），y=0 与 y=Ly/2 加对称面。偶模双 PMC（`M^y_0 M^y_{p_y/2}`），奇模双 PEC（`E^y_0 E^y_{p_y/2}`），各 9 点全部出数 |
 | Γ 点分解 | 全超胞近简并对 9.371189/9.374031 GHz 分解为 even 9.380732 与 odd 9.368432 GHz |
 | 图 | `hexagonal_GMK_path.png`，四段高对称点标注，含 5 组曲线与奇偶模散点 |
 
@@ -212,7 +212,7 @@ f1 从 9.378 GHz 降到 6.642 GHz（30 deg）再升到 24.083 GHz（180 deg）�
 
 因此 `hexagonal_GMK_path.png` 只能作为**分段扫描与折叠规则的示意图**，不能作为可发表的完整 Γ-M-K-Γ 色散图。要达到可发表，需要实现 MMTMM 本征求解或取得各模式的场型/复波数分类，再按 Appendix B 分配分支。
 
-文件：`hexagonal_ibz_full.py`、`hexagonal_ibz_full.csv`、`hexagonal_ibz_folded.csv`、`hexagonal_ibz_path.png`、`hexagonal_sym.py`、`hexagonal_sym_even/odd.csv`（奇模 CSV 由 `hexagonal_sym_odd.csv` 给出）、`hexagonal_sym_modes.csv`、`hexagonal_GMK_path.csv/png`、`hexagonal_gmk.py`、各 `*.log` 与 `eig_*` 目录。改动前工程备份 `tensor_patch.aedt.20261110-8.bak`。
+文件：`dev_history/hexagonal_ibz_full.py`、`hexagonal_ibz_full.csv`、`hexagonal_ibz_folded.csv`、`hexagonal_ibz_path.png`、`dev_history/hexagonal_sym.py`、`hexagonal_sym_even/odd.csv`（奇模 CSV 由 `hexagonal_sym_odd.csv` 给出）、`hexagonal_sym_modes.csv`、`hexagonal_GMK_path.csv/png`、`dev_history/hexagonal_gmk.py`、各 `*.log` 与 `eig_*` 目录。改动前工程备份 `tensor_patch.aedt.20261110-8.bak`。
 
 确定性：Table IV 范围、Appendix B 分支规则、Table VI 对称面组合 **已核验**（用户提供的 PDF 原文）；22 点频率、`φ↔2π−φ` 对称性、奇偶模各 9 点频率、Γ 点分解 **已核验**（本会话实测）；分支到 MK/KΓ 的分配 **启发式推断**；可发表性 **未达成**。
 
@@ -247,13 +247,13 @@ f1 从 9.378 GHz 降到 6.642 GHz（30 deg）再升到 24.083 GHz（180 deg）�
 
 `hexagonal_GMK_parity.png` 是 parity 标记后的分段扫描图，M、K 处仍可见跳变，不能作为可发表的完整 Γ-M-K-Γ 色散图。
 
-文件：`hexagonal_symx.py`、`hexagonal_symx_even.csv`、`hexagonal_symx_odd.csv`、`hexagonal_parity_modes.csv`、`hexagonal_parity_residual.csv`、`hexagonal_GMK_parity.png`、`hexagonal_gmk_v2.py`、`hexagonal_symx.log`、`eig_hexagonal_symx/`。工程新增 design `hexagonal_sym_x` 与 `hexagonal_sym_x_odd`，改动前备份 `tensor_patch.aedt.20261111-2.bak`。
+文件：`dev_history/hexagonal_symx.py`、`hexagonal_symx_even.csv`、`hexagonal_symx_odd.csv`、`hexagonal_parity_modes.csv`、`hexagonal_parity_residual.csv`、`hexagonal_GMK_parity.png`、`dev_history/hexagonal_gmk_v2.py`、`hexagonal_symx.log`、`eig_hexagonal_symx/`。工程新增 design `hexagonal_sym_x` 与 `hexagonal_sym_x_odd`，改动前备份 `tensor_patch.aedt.20261111-2.bak`。
 
 确定性：26 点频率、Γ 点校验、parity 分解、残差数值 **已核验**（本会话实测）；Table VI 组合 **已核验**（PDF 原文）；残差指标定义 **已修正**；even 分支未闭合的成因 **推断**；可发表性 **未达成**。
 
 ## 混合对称面组合（2026-11-11，已完成）
 
-按用户选定路径补齐 [Fig. 15(c)(d)](https://ieeexplore.ieee.org/document/10980079/) 的 `E^x_0 M^x_{p_x/2}`（em）与 `M^x_0 E^x_{p_x/2}`（me）。`hexagonal_symx.py` 加 `SYMX_MODE`，`set_symmetry` 改为两个面独立 `is_perfect_e`，边界名带 mode 后缀。两组各 13 点（`phi_y` 0 到 360 deg）全部出数。
+按用户选定路径补齐 [Fig. 15(c)(d)](https://ieeexplore.ieee.org/document/10980079/) 的 `E^x_0 M^x_{p_x/2}`（em）与 `M^x_0 E^x_{p_x/2}`（me）。`dev_history/hexagonal_symx.py` 加 `SYMX_MODE`，`set_symmetry` 改为两个面独立 `is_perfect_e`，边界名带 mode 后缀。两组各 13 点（`phi_y` 0 到 360 deg）全部出数。
 
 **验收口径修正**：混合组合固定 `φx=π`，其 `phi_y`=0 不该比全超胞 Γ 点 9.371189 GHz，应比 `phi_x`=180 的 36.456812 GHz。实测 em 36.563750、me 36.551101 GHz，偏差 0.09 到 0.11 GHz，几何与相位对应成立。
 
@@ -283,7 +283,7 @@ f1 从 9.378 GHz 降到 6.642 GHz（30 deg）再升到 24.083 GHz（180 deg）�
 
 `hexagonal_GMK_six.png` 是六组 parity/相位条件谱的分段扫描图，仍不能作为可发表的完整 Γ-M-K-Γ 色散图。
 
-文件：`hexagonal_symx.py`（改 `SYMX_MODE`）、`hexagonal_symx_em.csv`、`hexagonal_symx_me.csv`、`hexagonal_sixspectra_modes.csv`、`hexagonal_sixspectra_residual.csv`、`hexagonal_GMK_six.png`、`hexagonal_gmk_v3.py`、`eig_hexagonal_symx/`。工程新增 design `hexagonal_sym_x_em` 与 `hexagonal_sym_x_me`，改动前备份 `tensor_patch.aedt.20261111-4.bak` 与 `hexagonal_symx.py.20261111-2.bak`。
+文件：`dev_history/hexagonal_symx.py`（改 `SYMX_MODE`）、`hexagonal_symx_em.csv`、`hexagonal_symx_me.csv`、`hexagonal_sixspectra_modes.csv`、`hexagonal_sixspectra_residual.csv`、`hexagonal_GMK_six.png`、`dev_history/hexagonal_gmk_v3.py`、`eig_hexagonal_symx/`。工程新增 design `hexagonal_sym_x_em` 与 `hexagonal_sym_x_me`，改动前备份 `tensor_patch.aedt.20261111-4.bak` 与 `dev_history/hexagonal_symx.py.20261111-2.bak`。
 
 确定性：26 点频率、Γ 点校验、六组谱汇总、残差数值 **已核验**（本会话实测）；Fig. 15 混合组合 **已核验**（PDF 原文）；`φx=π` 由 y 方向类推 **推导**；39 GHz 配对是否为物理闭合 **未知**；可发表性 **未达成**。
 
@@ -303,7 +303,7 @@ f1 从 9.378 GHz 降到 6.642 GHz（30 deg）再升到 24.083 GHz（180 deg）�
 
 ### 结果
 
-`hexagonal_kcheck.py` 逐个核对残差表的 10 个候选配对。**全部 `same_k_mod_lattice=False`，全部判定为 FREQUENCY COINCIDENCE ONLY**。
+`dev_history/hexagonal_kcheck.py` 逐个核对残差表的 10 个候选配对。**全部 `same_k_mod_lattice=False`，全部判定为 FREQUENCY COINCIDENCE ONLY**。
 
 | 配对 | 频差 (GHz) | kA | kB | 高对称点归属 |
 |---|---|---|---|---|
@@ -320,13 +320,13 @@ f1 从 9.378 GHz 降到 6.642 GHz（30 deg）再升到 24.083 GHz（180 deg）�
 
 可发表性结论不变且更强：分支到路径的分配缺少 k 矢量判据，Appendix B 的复模态 HFSS ES 仍拿不到，[Fig. 13(d)](https://ieeexplore.ieee.org/document/10980079/) 的 SC/PC 映射显示当前候选配对跨 M 与 K 两个不同高对称点。
 
-文件：`hexagonal_kcheck.py`、`hexagonal_kcheck.csv`。`README_hexagonal.md` 改动前备份 `README_hexagonal.md.20261111.bak`。
+文件：`dev_history/hexagonal_kcheck.py`、`hexagonal_kcheck.csv`。`README.md` 改动前备份 `README.md.20261111.bak`。
 
 确定性：倒格矢与相位到 k 的映射 **推导**（基于 `M0`/`K0` 与超胞尺寸定义，[IEEE J. Microw. 3(4), 2023 附录 A](https://ieeexplore.ieee.org/document/10256254/)）；10 个配对的计算结果 **已核验**（本脚本实测）；`star of M/K` 中文译名 `[术语未验证]`；**在该残差表的跨 M/K 配对条件下**物理闭合未观测到。按 [Fig. 13(d)](https://ieeexplore.ieee.org/document/10980079/) 反推后的结果见下节。
 
 ## 按 Fig. 13(d) 反推 M 点组合（2026-11-11 深夜，已完成）
 
-`hexagonal_mpairs.py` 枚举八组谱的全部已求解相位点，计算 SC 帧 k，模 PC 倒格矢折回，判定是否落在 M 等价点集（`M0` 的六个 60° 旋转像，`star of M` 中文译名沿用上节 `[术语未验证]`）。无新仿真。
+`dev_history/hexagonal_mpairs.py` 枚举八组谱的全部已求解相位点，计算 SC 帧 k，模 PC 倒格矢折回，判定是否落在 M 等价点集（`M0` 的六个 60° 旋转像，`star of M` 中文译名沿用上节 `[术语未验证]`）。无新仿真。
 
 ### 落在 M 的谱点（仅 6 个）
 
@@ -361,13 +361,13 @@ f1 从 9.378 GHz 降到 6.642 GHz（30 deg）再升到 24.083 GHz（180 deg）�
 
 **Γ-M-K-Γ 路径在 M 处仍未闭合**。M→K 段的采样点 `φx=120°` 落在 K 等价点，不在 M 点，因此该段起点不能与 Γ→M 段终点（M 点）配对。39 GHz 残差表的判定维持：`x_em@180` 在 M，`y_even@120` 在 K，跨点频率接近属巧合。可发表性结论不变。
 
-文件：`hexagonal_mpairs.py`、`hexagonal_M_points.csv`、`hexagonal_M_pairs.csv`。`README_hexagonal.md` 改动前备份 `README_hexagonal.md.20261111-2.bak`。
+文件：`dev_history/hexagonal_mpairs.py`、`hexagonal_M_points.csv`、`hexagonal_M_pairs.csv`。`README.md` 改动前备份 `README.md.20261111-2.bak`。
 
 确定性：6 个 M 点谱点与 15 对配对 **已核验**（本脚本实测）；M/K 等价点集与折回规则 **推导**（基于倒格矢定义与 [IEEE J. Microw. 3(4), 2023 附录 A](https://ieeexplore.ieee.org/document/10256254/)）；配对是否为同一本征模 **未知**（需场型或 parity 对应）；Γ-M-K-Γ 路径闭合在当时采用的 M→K 方向下 **未成立**，方向修正后见下节。
 
 ## M→K 方向修正与最终接点（2026-11-12 凌晨，M 点闭合）
 
-`hexagonal_path_fold.py` 对 Γ→K1 路径每个 `φx` 计算 SC 帧 k 与 M/K 等价点集归属。**根因**：此前把 `φx=120°` 放在 M 端、`φx=0` 放在 K 端，M→K 段方向反了。
+`dev_history/hexagonal_path_fold.py` 对 Γ→K1 路径每个 `φx` 计算 SC 帧 k 与 M/K 等价点集归属。**根因**：此前把 `φx=120°` 放在 M 端、`φx=0` 放在 K 端，M→K 段方向反了。
 
 | 谱点 | k (rad/mm) | 归属 |
 |---|---|---|
@@ -390,7 +390,7 @@ K 点全部 12 模的最优配对为 0.068615 GHz，属跨模式频率接近，�
 
 此前「物理闭合零例」「Γ-M-K-Γ 路径在 M 处仍未闭合」是在反了的 M→K 方向下得出。按 Fig. 13(d) 修正方向后，**M 点已严格闭合**（k 一致且最低分支频率一致）。K 点仍差 2.49 GHz，[Appendix B](https://ieeexplore.ieee.org/document/10980079/) 的复模态 HFSS ES 拿不到，可发表性结论不变。
 
-文件：`hexagonal_path_fold.py`、`hexagonal_path_fold.csv`、`hexagonal_path_junctions.csv`、`hexagonal_gmk_final.py`、`hexagonal_GMK_final.png`、`hexagonal_GMK_final_junctions.csv`。文档改动前备份 `README_hexagonal.md.20261112-3.bak`。
+文件：`dev_history/hexagonal_path_fold.py`、`hexagonal_path_fold.csv`、`hexagonal_path_junctions.csv`、`dev_history/hexagonal_gmk_final.py`、`hexagonal_GMK_final.png`、`hexagonal_GMK_final_junctions.csv`。文档改动前备份 `README.md.20261112-3.bak`。
 
 确定性：Γ→K1 各 `φx` 的 k 与 M/K 归属 **已核验**（本脚本实测）；两处接点的 k 等价与频率差 **已核验**；M 点闭合 **已核验**；K 点 0.068615 GHz 跨模式配对是否为同一本征模 **未知**；完整可发表性 **未达成**。
 
@@ -422,13 +422,13 @@ even 分支依次对应全超胞奇数序号模（1、3、5、7、9），odd 分
 
 没有单一 parity 同时覆盖 M→K 与 K→Γ。Γ→M 与 M→K 由 odd 谱连接，K→Γ 由 even 谱连接，parity 必须在 K 点交叉。[Fig. 16(b)](https://ieeexplore.ieee.org/document/10980079/) 显示 K 附近确有多支模汇合（前向、后向与复模态），现有四组 y 方向组合不足以给出单 parity 连续路径。要严格闭合 K 点，需补 Fig. 15(c)(d) 的 y 方向混合组合 `E^y_0 M^y_{p_y/2}` 与 `M^y_0 E^y_{p_y/2}`（对应 `φy=π`），或取得复模态分类。可发表性仍未达成。
 
-文件：`hexagonal_k_parity.py`、`hexagonal_K_parity.csv`、`hexagonal_K_parity_path.csv`。文档改动前备份 `README_hexagonal.md.20261112-4.bak`。
+文件：`dev_history/hexagonal_k_parity.py`、`hexagonal_K_parity.csv`、`hexagonal_K_parity_path.csv`。文档改动前备份 `README.md.20261112-4.bak`。
 
 确定性：K 点 parity 分解、模式序号对应、路径访问点 **已核验**（本脚本实测）；K 点需要 parity 交叉的成因 **推断**；混合组合能否提供单 parity 路径 **未知**。
 
 ## y 方向混合对称面组合（2026-11-12 上午，已完成，覆盖判定为否）
 
-按 [Fig. 15(c)(d)](https://ieeexplore.ieee.org/document/10980079/) 补 `E^y_0 M^y_{p_y/2}`（em）与 `M^y_0 E^y_{p_y/2}`（me），对应 `φy=π`。`hexagonal_symy_mixed.py` 复用 y 方向半超胞几何，两组各用独立 design（`hexagonal_sym_y_em`、`hexagonal_sym_y_me`），x 方向保留 Lattice Pair 扫 `φx` 0 到 4π/3。
+按 [Fig. 15(c)(d)](https://ieeexplore.ieee.org/document/10980079/) 补 `E^y_0 M^y_{p_y/2}`（em）与 `M^y_0 E^y_{p_y/2}`（me），对应 `φy=π`。`dev_history/hexagonal_symy_mixed.py` 复用 y 方向半超胞几何，两组各用独立 design（`hexagonal_sym_y_em`、`hexagonal_sym_y_me`），x 方向保留 Lattice Pair 扫 `φx` 0 到 4π/3。
 
 | 项 | 结果 |
 |---|---|
@@ -449,7 +449,7 @@ em/me 混合组合在 `φx=180` 时 k=(1.0472, 0.6046)，落在 M 等价点集�
 
 **结论**：补齐 Fig. 15 四组 y 方向组合后，仍无单一 parity 覆盖 M→K→Γ。K 点的 parity 交叉是物理必需，或需要 [Appendix B](https://ieeexplore.ieee.org/document/10980079/) 的复模态分类与 MMTMM 本征解。卡点已从采样不足转为方法层面，HFSS Eigenmode 实频 `.eig` 加对称面链路无法给出可发表的完整 Γ-M-K-Γ 色散图。
 
-文件：`hexagonal_symy_mixed.py`、`hexagonal_symy_em.csv`、`hexagonal_symy_me.csv`、`hexagonal_ymixed_path.py`、`hexagonal_ymixed_path.csv`、`hexagonal_ymixed_summary.csv`、`hexagonal_symy_mixed.log`。文档改动前备份 `README_hexagonal.md.20261112-5.bak`，工程备份 `tensor_patch.aedt.20261112-2.bak`。
+文件：`dev_history/hexagonal_symy_mixed.py`、`hexagonal_symy_em.csv`、`hexagonal_symy_me.csv`、`dev_history/hexagonal_ymixed_path.py`、`hexagonal_ymixed_path.csv`、`hexagonal_ymixed_summary.csv`、`hexagonal_symy_mixed.log`。文档改动前备份 `README.md.20261112-5.bak`，工程备份 `tensor_patch.aedt.20261112-2.bak`。
 
 确定性：18 点频率、单点校验、高对称点归属与覆盖汇总 **已核验**（本会话实测）；Fig. 15 混合组合规则 **已核验**（PDF 原文）；K 点 parity 交叉的成因 **推断**；可发表性 **未达成**。
 
@@ -466,7 +466,7 @@ em/me 混合组合在 `φx=180` 时 k=(1.0472, 0.6046)，落在 M 等价点集�
 
 ### 第 2 步探针（未通过）
 
-`hexagonal_driven_probe.py` 新建 design `hexagonal_driven_probe`（DrivenModal），矩形超胞保留 4 对 Lattice Pair 与圆盘贴片，去掉 Eigenmode 的 PEC 顶盖，顶面赋 `Floquet port`（modes=2，A/B 向量沿 Lx/Ly），`HFSSDriven` setup 17 GHz 加 15 到 19 GHz Discrete sweep 9 点。
+`dev_history/hexagonal_driven_probe.py` 新建 design `hexagonal_driven_probe`（DrivenModal），矩形超胞保留 4 对 Lattice Pair 与圆盘贴片，去掉 Eigenmode 的 PEC 顶盖，顶面赋 `Floquet port`（modes=2，A/B 向量沿 Lx/Ly），`HFSSDriven` setup 17 GHz 加 15 到 19 GHz Discrete sweep 9 点。
 
 | 检查 | 结果 |
 |---|---|
@@ -486,7 +486,7 @@ em/me 混合组合在 `φx=180` 时 k=(1.0472, 0.6046)，落在 M 等价点集�
 
 诊断问题：需要在 AEDT GUI 打开 `hexagonal_driven_probe` 读取 Validation 消息窗口，或改用官方教程的 Primary/Secondary 加双端口配置重建探针，才能定位验证失败的具体项。
 
-文件：`hexagonal_driven_probe.py`、`hexagonal_driven_probe.log`。文档改动前备份 `README_hexagonal.md.20261112-6.bak`，工程备份 `tensor_patch.aedt.20261112-4.bak`，探针脚本备份 `hexagonal_driven_probe.py.20261112.bak`。
+文件：`dev_history/hexagonal_driven_probe.py`、`hexagonal_driven_probe.log`。文档改动前备份 `README.md.20261112-6.bak`，工程备份 `tensor_patch.aedt.20261112-4.bak`，探针脚本备份 `dev_history/hexagonal_driven_probe.py.20261112.bak`。
 
 确定性：官方端口约束与 PyAEDT API **已核验**（官方页与本地库）；探针的 validate/analyze/export 失败 **已核验**（本会话实测）；失败成因 **推断**；S 参数反演复波数 **未执行**；复模态能否补上 K 点 **未知**。
 
@@ -520,22 +520,25 @@ Driven 探针失败后按计划回退路线 2。在现有 `hexagonal` design 内
 
 限制：M 只有 4 个值；NumModes=12 按序号取 mode1/mode2，密集模式族下可能混分支；Eigenmode 禁辐射边界与频变材料（[Ansys Help](https://ansyshelp.ansys.com/public//Views/Secured/Electronics/v242/en/Subsystems/HFSS/Content/HFSS/AddinganEigenmodeSetup.htm)）；Driven 漏波未做。
 
-文件：`hexagonal_modulation.py`、`hexagonal_modulation.csv`、`hexagonal_modulation_gap.csv`、`hexagonal_modulation_gap.png`、`hexagonal_modulation.log`、`eig_hexagonal_modulation/`。文档改动前备份 `README_hexagonal.md.20261112-7.bak`，工程备份 `tensor_patch.aedt.20261112-6.bak`。
+文件：`hexagonal_modulation.py`、`hexagonal_modulation.csv`、`hexagonal_modulation_gap.csv`、`hexagonal_modulation_gap.png`、`hexagonal_modulation.log`、`eig_hexagonal_modulation/`。文档改动前备份 `README.md.20261112-7.bak`，工程备份 `tensor_patch.aedt.20261112-6.bak`。
 
 确定性：12 个 variation 频率、Γ 点单调劈裂、区边界非单调 **已核验**（本会话实测）；区边界非单调的成因 **推断**；与其他案例带隙数值的可比性 **推断**。
 
 ## 文件清单
 
+> 本目录仅保留 4 个规范化脚本：`hexagonal_patch.py`、`hexagonal_rect.py`、`hexagonal_ibz.py`、`hexagonal_modulation.py`。其余探索性脚本（`hexagonal_ws.py`、`hexagonal_diagnose.py`、`hexagonal_sym*.py`、`hexagonal_gmk*.py`、`hexagonal_kcheck.py`、`hexagonal_mpairs.py`、`hexagonal_path_fold.py`、`hexagonal_k_parity.py`、`hexagonal_symy_mixed.py`、`hexagonal_driven_probe.py`、`hexagonal_ibz_full.py`、`hexagonal_ymixed_path.py`）已移至 `dev_history/`。
+> `.aedt` / `.aedtresults/` / `eig*/` / `*.log` 等未提交仓库（见根目录 `.gitignore`），均由脚本运行时生成，可重建。本文档多处 `*.bak`（含 `.workbuddy/backups/...`）为本地回滚备份，未纳入仓库。
+
 | 文件 | 用途 |
 |---|---|
-| `hexagonal_patch.py` | 菱形原胞建模、单点、张量扫描、Γ→M 色散 |
-| `tensor_patch.aedt` | 主工程，新增 design `hexagonal` |
+| `hexagonal_patch.py` | 菱形原胞建模、单点、张量扫描、Γ→M 色散（规范化脚本，在本目录）|
+| `tensor_patch.aedt`（运行时生成，未提交仓库）| 主工程，新增 design `hexagonal` |
 | `hexagonal_xeff_points.csv` / `hexagonal_lightline.png` | 15 点 f(β) 与光锥对比 |
 | `hexagonal_dispersion.csv` / `hexagonal_dispersion.png` | Γ→M 段 7 点色散 |
 | `hexagonal_xeff.csv` / `hexagonal_fit.csv` | 未生成（反解未通过判据） |
-| `hexagonal.log` / `eig_hexagonal/` | 运行留痕与官方 `.eig` |
+| `hexagonal.log`（运行时生成，未提交仓库）/ `eig_hexagonal/`（`.eig` 未提交仓库）| 运行留痕与官方 `.eig` |
 
-工程改动前备份为 `.workbuddy/backups/tensor_patch/tensor_patch.aedt.20261109-6.bak`。其余 design 与 `ideal_tensor.aedt` 未改动。
+工程改动前曾在本地备份为 `.workbuddy/backups/tensor_patch/tensor_patch.aedt.20261109-6.bak`（**本地备份，未纳入仓库**）。其余 design 与 `ideal_tensor.aedt` 未改动。
 
 ## 来源与确定性
 

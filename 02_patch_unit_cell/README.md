@@ -98,15 +98,17 @@ MODE_INDEX=2 RUN_MODE=post python patch_unitcell.py   # 换模式分支
 
 | 文件 | 用途 |
 |---|---|
-| `patch_unitcell.py` / `patch_unitcell.aedt` | 主流程脚本与工程 |
-| `ideal_check.py` / `ideal_sheet.aedt` | 独立闭环脚本与工程 |
-| `eig_points.csv` / `eig/` | 35 点原始本征频率与官方 `.eig` |
+| `patch_unitcell.py` / `patch_unitcell.aedt`（工程运行时生成，未提交仓库）| 主流程脚本与工程 |
+| `ideal_check.py` / `ideal_sheet.aedt`（工程运行时生成，未提交仓库）| 独立闭环脚本与工程 |
+| `eig_points.csv` / `eig/`（`.eig` 未提交仓库）| 35 点原始本征频率与官方 `.eig` |
 | `Z_vs_g.csv` / `Z_vs_g.png` | Z(g) 主结果与文献端点对照图 |
 | `Xs_by_mode.csv` / `ideal_dispersion.csv` | 各模式反解值、理想模型色散 |
 | `ideal_compare.png` / `dispersion_by_g.png` | 独立闭环图、辅助色散图 |
-| `run.log` / `ideal_check.log` | 运行留痕 |
+| `run.log` / `ideal_check.log`（运行时生成，未提交仓库）| 运行留痕 |
 
-原案例 `scalar_impedance_eigenmode/` 完全未改动，可作回滚基线。
+> 说明：`.aedt` / `.aedtresults/` / `eig/` / `*.log` 等未提交仓库（见根目录 `.gitignore`），均由脚本运行时生成，可重建。
+
+原案例 `01_scalar_impedance_surface/`（原目录名 `scalar_impedance_eigenmode/`）完全未改动，可作回滚基线。
 
 ## 来源与确定性
 

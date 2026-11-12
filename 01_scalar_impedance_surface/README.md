@@ -94,10 +94,12 @@ AEDT_REUSE_PORT=<port> AEDT_REUSE_PID=<pid> <python> build_and_run.py
 
 | 文件 | 用途 |
 |---|---|
-| `scalar_impedance_eigenmode.aedt` | 无损主工程（含结果目录 `.aedtresults/`） |
-| `scalar_impedance_lossy.aedt` | 有耗对照工程 |
+| `scalar_impedance_eigenmode.aedt`（运行时由 `build_and_run.py` 生成，未提交仓库）| 无损主工程；`.aedtresults/` 同样未提交 |
+| `scalar_impedance_lossy.aedt`（运行时生成，未提交仓库）| 有耗对照工程 |
 | `build_and_run.py` | 全流程可复现脚本 |
 | `eig_*.eig` | 官方导出的本征模原始数据表 |
 | `dispersion.csv` / `dispersion.png` / `dispersion.svg` | 色散数据与图 |
 | `lossy_result.csv` | 有耗对照汇总 |
-| `run.log` / `raw_reports.txt` / `solve.log` | 运行与失败样本留痕（过程产物） |
+| `run.log` / `raw_reports.txt` / `solve.log`（运行时生成，未提交仓库）| 运行与失败样本留痕（过程产物） |
+
+> 说明：`.aedt` / `.aedtresults/` / `*.log` 等二进制与求解产物未提交仓库（见根目录 `.gitignore`），均由 `build_and_run.py` 在运行时生成，删除后可重新跑出，无需纳入版本控制。

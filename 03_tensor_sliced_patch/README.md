@@ -97,9 +97,9 @@
 
 `tensor_patch.aedt` 内只剩 1 个 design。之前的 `patch_ts45_gs10` 与 `parametric` 是同一模型只改参数，已删除前者；`ideal_tensor` 物理模型不同，拆为独立工程。历史 121 点数据在 `eig_points.csv` 与 `eig/`，不依赖工程文件。
 
-`tensor_patch.py` 保留为历史数据后处理脚本，只接受 `RUN_MODE=post`；仿真统一走 `parametric_scan.py`，闭环走 `ideal_tensor_check.py`（独立工程）。
+`dev_history/tensor_patch.py` 保留为历史数据后处理脚本，只接受 `RUN_MODE=post`；仿真统一走 `parametric_scan.py`，闭环走 `ideal_tensor_check.py`（独立工程）。
 
-改动前主工程已备份为 `.workbuddy/backups/tensor_patch/tensor_patch.aedt.20261109.bak`（158169 bytes，sha256 23aef5d0…）。早期 6 个配置工程与旧 `ideal_tensor.aedt` 备份在 `legacy_projects_20261108/`，均移入 Windows 回收站，可还原。
+改动前主工程曾在本地备份为 `.workbuddy/backups/tensor_patch/tensor_patch.aedt.20261109.bak`（158169 bytes，sha256 23aef5d0…；**本地备份，未纳入仓库**）。早期 6 个配置工程与旧 `ideal_tensor.aedt` 备份原在 `legacy_projects_20261108/`，已移入 Windows 回收站，不再随仓库分发。
 
 ## Optimetrics 参数扫描（2026-11-09）
 
@@ -131,28 +131,30 @@
 python parametric_scan.py                    # 实物单元主仿真，Optimetrics 扫 theta_s / gs
 RUN_MODE=export python parametric_scan.py   # 只重导出 6 个 variation 结果
 python ideal_tensor_check.py                # 独立工程 ideal_tensor.aedt，闭环验证
-RUN_MODE=post python tensor_patch.py        # 历史 121 点数据重算表与图，不启动求解
+RUN_MODE=post python dev_history/tensor_patch.py        # 历史 121 点数据重算表与图，不启动求解
 ```
 
-解释器 `C:/Users/Verno/.workbuddy/binaries/python/envs/pyaedtmcp/Scripts/python.exe`，AEDT 2026.1 GUI 模式，脚本内注入 `ANSYSEM_ROOT261` 与 `AWP_ROOT261`。`tensor_patch.py` 在非 `post` 模式会主动报错，避免误建 design。
+解释器 `C:/Users/Verno/.workbuddy/binaries/python/envs/pyaedtmcp/Scripts/python.exe`，AEDT 2026.1 GUI 模式，脚本内注入 `ANSYSEM_ROOT261` 与 `AWP_ROOT261`。`dev_history/tensor_patch.py` 在非 `post` 模式会主动报错，避免误建 design。
 
 ## 文件清单
 
 | 文件 | 用途 |
 |---|---|
-| `tensor_patch.aedt` | 实物单元工程，单 design `parametric` |
-| `ideal_tensor.aedt` | 理想边界闭环工程，单 design `ideal_tensor` |
+| `tensor_patch.aedt`（运行时生成，未提交仓库）| 实物单元工程，单 design `parametric` |
+| `ideal_tensor.aedt`（运行时生成，未提交仓库）| 理想边界闭环工程，单 design `ideal_tensor` |
 | `parametric_scan.py` | 主仿真脚本，Optimetrics 参数扫描 |
-| `tensor_patch.py` | 历史数据后处理，仅 `RUN_MODE=post` |
+| `dev_history/tensor_patch.py` | 历史数据后处理，仅 `RUN_MODE=post` |
 | `ideal_tensor_check.py` | 独立闭环脚本 |
-| `parametric_results.csv` / `parametric_export.csv` / `eig_parametric/` | 6 个 variation 的本征频率与官方 `.eig` |
-| `eig_points.csv` / `eig/` / `eig_ideal/` | 121 点原始本征频率与官方 `.eig` |
+| `parametric_results.csv` / `parametric_export.csv` / `eig_parametric/`（`.eig` 未提交仓库）| 6 个 variation 的本征频率与官方 `.eig` |
+| `eig_points.csv` / `eig/`（未提交仓库）/ `eig_ideal/` | 121 点原始本征频率与官方 `.eig` |
 | `Xeff_by_angle.csv` / `tensor_fit.csv` | 方向相关等效电抗与张量拟合结果 |
 | `tensor_patch.png` / `principal_angle.png` | X_eff(θ) 曲线、主轴角随切片角 |
 | `ideal_tensor_compare.csv` / `.png` | 独立闭环数据与图 |
-| `run.log` / `ideal_check.log` | 运行留痕 |
+| `run.log` / `ideal_check.log`（运行时生成，未提交仓库）| 运行留痕 |
 
-`scalar_impedance_eigenmode/` 与 `patch_unitcell/` 完全未改动，可作回滚基线。
+> 说明：`.aedt` / `.aedtresults/` / `eig*/` / `*.log` 等未提交仓库（见根目录 `.gitignore`），均由脚本运行时生成，可重建。`tensor_patch.py` 作为历史数据后处理脚本已移至 `dev_history/`。
+
+`01_scalar_impedance_surface/`（原 `scalar_impedance_eigenmode/`）与 `02_patch_unit_cell/`（原 `patch_unitcell/`）完全未改动，可作回滚基线。
 
 ## 来源与确定性
 

@@ -37,7 +37,7 @@
 ## 必须说明的限制
 
 1. **带隙测的是最低折叠分支，不是 17 GHz 表面波主模**。NumModes=8 只覆盖约 10 到 16 GHz，区边界处 f1≈11.0 GHz。若要 17 GHz 附近的带隙，需把 NumModes 提到 16 以上并按频率连续性追踪分支，本次未做。
-2. **调制是几何调制**。计划原写「用 Z(g) 拟合反求 g_i 使 Z 正弦」，实际改为让 `gap_i` 直接按正弦变化。原因是在 AEDT 表达式中复合三次反演不可靠，且 M 需要保持为单一可扫变量。等效阻抗调制深度与 M 非线性相关，可用 `patch_unitcell/Z_vs_g.csv` 在报告里换算，本次未换算。
+2. **调制是几何调制**。计划原写「用 Z(g) 拟合反求 g_i 使 Z 正弦」，实际改为让 `gap_i` 直接按正弦变化。原因是在 AEDT 表达式中复合三次反演不可靠，且 M 需要保持为单一可扫变量。等效阻抗调制深度与 M 非线性相关，可用 `02_patch_unit_cell/results/Z_vs_g.csv` 在报告里换算，本次未换算。
 3. **模式换序**。phi=30°、M=0.3 时 mode2 跳到约 12.0 GHz，与其他 M 的同序号分支不连续。带隙只在 phi=180° 取最低两分支，避开该跳变；跨相位比较必须做模式追踪。
 4. **有效介质假设**。p=3 mm、λ0≈17.6 mm，p/λ0≈0.17 已超严格 λ/10，Fong 2010 的 17 GHz 单元同样如此。论文另自报仿真与近场测量需 1 到 1.37 标定且原因未知（[正文片段](https://www.researchgate.net/publication/224151557_Scalar_and_Tensor_Holographic_Artificial_Impedance_Surfaces)）。结论不外推到天线增益。
 5. **未做漏波辐射**。Eigenmode 禁辐射边界，Driven/Floquet 分支默认不做，若要辐射角需另建独立工程。
@@ -66,13 +66,15 @@ RUN_MODE=post python supercell_scan.py     # 只重算表与图
 | 文件 | 用途 |
 |---|---|
 | `supercell_scan.py` | 超胞建模、Optimetrics 扫描、导出与后处理 |
-| `tensor_patch.aedt` | 主工程，含 design `parametric`（保留）与 `supercell` |
-| `supercell_results.csv` / `eig_supercell/` | 24 个 variation 的频率与官方 `.eig` |
+| `tensor_patch.aedt`（运行时生成，未提交仓库）| 主工程，含 design `parametric`（保留）与 `supercell` |
+| `supercell_results.csv` / `eig_supercell/`（`.eig` 未提交仓库）| 24 个 variation 的频率与官方 `.eig` |
 | `bandgap_vs_M.csv` / `bandgap_vs_M.png` | 带隙随 M 的表与图 |
 | `dispersion_M.png` | 各 M 的折叠色散曲线 |
-| `supercell.log` | 运行留痕 |
+| `supercell.log`（运行时生成，未提交仓库）| 运行留痕 |
 
-工程改动前备份为 `.workbuddy/backups/tensor_patch/tensor_patch.aedt.20261109-2.bak`（68421 bytes）。`ideal_tensor.aedt` 完全未动。
+> 说明：`.aedt` / `.aedtresults/` / `eig*/` / `*.log` 等未提交仓库（见根目录 `.gitignore`），均由脚本运行时生成，可重建。
+
+工程改动前曾在本地备份为 `.workbuddy/backups/tensor_patch/tensor_patch.aedt.20261109-2.bak`（68421 bytes；**本地备份，未纳入仓库**）。`ideal_tensor.aedt` 完全未动。
 
 ## 来源与确定性
 

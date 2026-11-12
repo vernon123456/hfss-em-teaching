@@ -85,14 +85,16 @@ python circular_supercell.py               # 8 单元超胞带隙
 | 文件 | 用途 |
 |---|---|
 | `circular_patch.py` / `circular_supercell.py` | 单元与超胞脚本 |
-| `tensor_patch.aedt` | 主工程，新增 design `circular` 与 `circular_supercell` |
+| `tensor_patch.aedt`（运行时生成，未提交仓库）| 主工程，新增 design `circular` 与 `circular_supercell` |
 | `circular_xeff.csv` / `circular_fit.csv` | 方向相关电抗与张量拟合 |
 | `circular_sweep.csv` | 11 个 Optimetrics variation 的前 12 个模式频率 |
 | `circular_supercell_results.csv` / `circular_bandgap_vs_M.csv` | 超胞结果与带隙对照 |
 | `circular_xeff.png` / `circular_axis.png` / `circular_bandgap_vs_M.png` | 图表 |
-| `circular.log` / `circular_supercell.log` / `eig_circular*/` | 运行留痕与官方 `.eig` |
+| `circular.log` / `circular_supercell.log`（运行时生成，未提交仓库）/ `eig_circular*/`（`.eig` 未提交仓库）| 运行留痕与官方 `.eig` |
 
-工程改动前备份为 `.workbuddy/backups/tensor_patch/tensor_patch.aedt.20261109-4.bak`。`parametric`、`supercell` 与 `ideal_tensor.aedt` 未改动。
+> 说明：`.aedt` / `.aedtresults/` / `eig*/` / `*.log` 等未提交仓库（见根目录 `.gitignore`），均由脚本运行时生成，可重建。
+
+工程改动前曾在本地备份为 `.workbuddy/backups/tensor_patch/tensor_patch.aedt.20261109-4.bak`（**本地备份，未纳入仓库**）。`parametric`、`supercell` 与 `ideal_tensor.aedt` 未改动。
 
 ## 来源与确定性
 

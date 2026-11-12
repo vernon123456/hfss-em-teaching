@@ -1,0 +1,9 @@
+# 统一换行符为 LF，避免 Windows / 跨平台提交时的 CRLF 警告
+* text=auto eol=lf
+
+# 二进制仿真产物：已 gitignore，且不应被文本规范化
+*.aedt binary
+*.aedtresults binary
+*.pyaedt binary
+*.png binary
+*.svg binary
